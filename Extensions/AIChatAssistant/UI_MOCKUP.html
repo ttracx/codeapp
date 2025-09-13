@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Assistant - UI Mockup</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f7;
+        }
+        .mockup-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .titlebar {
+            background: #f6f6f6;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .traffic-lights {
+            display: flex;
+            gap: 8px;
+        }
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .close { background: #ff5f57; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #28ca42; }
+        .main-container {
+            display: flex;
+            height: 600px;
+        }
+        .activity-bar {
+            width: 50px;
+            background: #2c2c2c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 0;
+            gap: 8px;
+        }
+        .activity-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #969696;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .activity-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .activity-item.selected {
+            background: #007acc;
+            color: white;
+        }
+        .sidebar {
+            width: 300px;
+            background: #252526;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header {
+            padding: 12px 16px;
+            background: #323233;
+            border-bottom: 1px solid #3e3e42;
+            color: #cccccc;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .message {
+            display: flex;
+            flex-direction: column;
+        }
+        .message.user {
+            align-items: flex-end;
+        }
+        .message-bubble {
+            max-width: 70%;
+            padding: 8px 12px;
+            border-radius: 16px;
+            color: white;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .message.user .message-bubble {
+            background: #007acc;
+        }
+        .message.assistant .message-bubble {
+            background: #3e3e42;
+            color: #cccccc;
+        }
+        .message-time {
+            font-size: 11px;
+            color: #969696;
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+        .chat-input {
+            padding: 16px;
+            background: #252526;
+            border-top: 1px solid #3e3e42;
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .input-field {
+            flex: 1;
+            background: #3c3c3c;
+            border: 1px solid #5a5a5a;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #cccccc;
+            font-size: 14px;
+            resize: none;
+            min-height: 20px;
+            max-height: 80px;
+        }
+        .send-button {
+            width: 36px;
+            height: 36px;
+            background: #007acc;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .send-button:hover {
+            background: #005a9e;
+        }
+        .editor-area {
+            flex: 1;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .streaming-indicator {
+            opacity: 0.7;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        .brain-icon {
+            font-size: 24px;
+        }
+        .header-title {
+            font-size: 16px;
+        }
+        .clear-button {
+            background: none;
+            border: none;
+            color: #969696;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+        }
+        .clear-button:hover {
+            background: rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="mockup-container">
+        <div class="titlebar">
+            <div class="traffic-lights">
+                <div class="traffic-light close"></div>
+                <div class="traffic-light minimize"></div>
+                <div class="traffic-light maximize"></div>
+            </div>
+            <span style="margin-left: auto; margin-right: auto; font-size: 13px; color: #666;">Code App</span>
+        </div>
+        
+        <div class="main-container">
+            <!-- Activity Bar -->
+            <div class="activity-bar">
+                <div class="activity-item">📄</div>
+                <div class="activity-item">🔍</div>
+                <div class="activity-item">🔀</div>
+                <div class="activity-item">📡</div>
+                <div class="activity-item selected brain-icon">🧠</div>
+                <div style="flex: 1;"></div>
+                <div class="activity-item">⚙️</div>
+            </div>
+            
+            <!-- AI Chat Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <span class="brain-icon">🧠</span>
+                    <span class="header-title">AI Coding Assistant</span>
+                    <div style="flex: 1;"></div>
+                    <button class="clear-button">🗑️</button>
+                </div>
+                
+                <div class="chat-container">
+                    <div class="chat-messages">
+                        <div class="message user">
+                            <div class="message-bubble">
+                                How do I implement a REST API in Swift using Vapor framework?
+                            </div>
+                            <div class="message-time">2:30 PM</div>
+                        </div>
+                        
+                        <div class="message assistant">
+                            <div class="message-bubble">
+                                I'll help you implement a REST API in Swift using Vapor! Here's a comprehensive approach:
+
+                                <br><br><strong>1. Setup your project:</strong><br>
+                                ```bash<br>
+                                swift package init --type executable<br>
+                                ```<br><br>
+
+                                <strong>2. Add Vapor dependency to Package.swift:</strong><br>
+                                ```swift<br>
+                                dependencies: [<br>
+                                &nbsp;&nbsp;.package(url: "https://github.com/vapor/vapor.git", from: "4.0.0")<br>
+                                ]<br>
+                                ```
+                            </div>
+                            <div class="message-time">2:31 PM</div>
+                        </div>
+                        
+                        <div class="message user">
+                            <div class="message-bubble">
+                                Can you show me a complete example with CRUD operations?
+                            </div>
+                            <div class="message-time">2:32 PM</div>
+                        </div>
+                        
+                        <div class="message assistant">
+                            <div class="message-bubble streaming-indicator">
+                                Absolutely! Here's a complete CRUD example. Let me create a Todo API for you:
+
+                                <br><br><strong>First, define your model:</strong><br>
+                                ```swift<br>
+                                import Vapor<br>
+                                import Fluent<br><br>
+                                
+                                final class Todo: Model, Content {<br>
+                                &nbsp;&nbsp;static let schema = "todos"<br><br>
+                                
+                                &nbsp;&nbsp;@ID(key: .id)<br>
+                                &nbsp;&nbsp;var id: UUID?<br><br>
+                                
+                                &nbsp;&nbsp;@Field(key: "title")<br>
+                                &nbsp;&nbsp;var title: String<br><br>
+                                
+                                &nbsp;&nbsp;@Field(key: "completed")<br>
+                                &nbsp;&nbsp;var completed: Bool<br><br>
+                                
+                                &nbsp;&nbsp;init() { }<br>
+                                ```<br><br>
+                                
+                                <strong>Now, let's create the routes...</strong> ⟨streaming⟩
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <textarea class="input-field" placeholder="Ask your AI coding assistant..." rows="1"></textarea>
+                        <button class="send-button">📤</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Editor Area -->
+            <div class="editor-area">
+                <div style="text-align: center; color: #666;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">💻</div>
+                    <div>Editor area - Your code would appear here</div>
+                    <div style="font-size: 12px; margin-top: 8px;">The AI assistant helps you code without interrupting your workflow</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center; color: #666; font-size: 14px;">
+        <strong>AI Chat Assistant Integration Preview</strong><br>
+        🧠 Brain icon in Activity Bar • Real-time streaming responses • Maintained conversation context<br>
+        <em>Keyboard shortcut: Cmd+Shift+A</em>
+    </div>
+</body>
+</html>
