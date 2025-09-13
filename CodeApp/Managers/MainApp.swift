@@ -446,6 +446,20 @@ class MainApp: ObservableObject {
         extensionManager.activityBarManager.registerItem(item: sourceControl)
         extensionManager.activityBarManager.registerItem(item: remote)
 
+        let agent = ActivityBarItem(
+            itemID: "AGENT",
+            iconSystemName: "wand.and.stars",
+            title: "Agent",
+            shortcutKey: nil,
+            modifiers: nil,
+            view: AnyView(AgentContainer()),
+            contextMenuItems: nil,
+            bubble: { nil },
+            isVisible: { true }
+        )
+
+        extensionManager.activityBarManager.registerItem(item: agent)
+
     }
 
     @MainActor
