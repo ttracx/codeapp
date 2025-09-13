@@ -60,7 +60,7 @@ struct AIChatView: View {
                             .foregroundColor(.orange)
                         Text(error.localizedDescription)
                             .font(.caption)
-                            .foregroundColor(.primary)
+                            .foregroundColor(Color.init(id: "panelTitle.activeForeground"))
                         Spacer()
                         Button("Dismiss") {
                             aiService.clearError()
@@ -79,7 +79,7 @@ struct AIChatView: View {
                     
                     Button(action: sendMessage) {
                         Image(systemName: isStreaming ? "stop.circle.fill" : "paperplane.fill")
-                            .foregroundColor(canSend ? Color.blue : Color.gray)
+                            .foregroundColor(canSend ? Color.blue : Color.init(id: "activityBar.inactiveForeground"))
                     }
                     .disabled(!canSend)
                 }
@@ -87,8 +87,7 @@ struct AIChatView: View {
                 .padding(.bottom, 12)
             }
         }
-        .navigationTitle("AI Assistant")
-        .navigationBarTitleDisplayMode(.inline)
+        .background(Color.init(id: "sideBar.background"))
     }
     
     private var canSend: Bool {
@@ -165,14 +164,14 @@ struct MessageBubble: View {
                     .padding(.vertical, 8)
                     .background(
                         RoundedRectangle(cornerRadius: 16)
-                            .fill(message.role == .user ? Color.blue : Color(UIColor.systemGray5))
+                            .fill(message.role == .user ? Color.blue : Color.init(id: "input.background"))
                     )
-                    .foregroundColor(message.role == .user ? .white : .primary)
+                    .foregroundColor(message.role == .user ? .white : Color.init(id: "panelTitle.activeForeground"))
                 
                 if !isStreaming {
                     Text(formatTime(message.timestamp))
                         .font(.caption2)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Color.init(id: "activityBar.inactiveForeground"))
                 }
             }
             

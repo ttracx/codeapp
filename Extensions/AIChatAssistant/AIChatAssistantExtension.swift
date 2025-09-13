@@ -18,7 +18,7 @@ class AIChatAssistantExtension: CodeAppExtension {
             modifiers: [.command, .shift],
             view: AnyView(AIChatContainer()),
             contextMenuItems: nil,
-            positionPrecedence: 50, // Position after existing items
+            positionPrecedence: -10, // Position after main items but before auxiliary items
             bubble: { nil },
             isVisible: { true }
         )
